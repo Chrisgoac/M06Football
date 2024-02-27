@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,20 +16,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('test');
+    return view('welcome');
 });
 
 Route::get('/home', function () {
     return view('welcome');
 });
 
-Route::get('/manage/teams', function () {
-    return view('manage.teams');
-});
+// Route::get('/manage/teams', function () {
+//     return view('manage.teams');
+// });
 
-Route::get('/manage/players', function () {
-    return view('manage.players');
-});
+// Route::get('/manage/players', function () {
+//     return view('manage.players');
+// });
 
-Route::get('/teams/list', [TeamController::class, 'listAll']);
+Route::get('/manage/teams', [TeamController::class, 'listAll']);
 Route::get('/team/{id}', [TeamController::class, 'find']);
+
+Route::get('/manage/players', [PlayerController::class, 'listAll']);
+Route::get('/player/{id}', [PlayerController::class, 'find']);

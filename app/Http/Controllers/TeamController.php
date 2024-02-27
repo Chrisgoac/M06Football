@@ -15,7 +15,7 @@ class TeamController extends Controller
 
     public function listAll() {
         $teams = Team::all();
-        return view('team.list', compact('teams'));
+        return view('manage.teams', compact('teams'));
     }
 
     public function find(int $id) {

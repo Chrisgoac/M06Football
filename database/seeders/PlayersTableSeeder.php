@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class PlayersTableSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\Team::factory()
             ->count(36)
-            ->sequence(fn ($sequence) => ['name' => 'Team '.$sequence->index])
+            ->sequence(fn ($sequence) => ['' => 'Team '.$sequence->index])
             ->hasPlayers(15)
             ->create();
     }
