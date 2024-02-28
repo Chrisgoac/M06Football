@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('surname');
             $table->text('position');
             $table->double('salary');
-            $table->integer('team_id')->unsigned()->index();
+            $table->integer('team_id')->unsigned()->nullable()->index();
             $table->foreign('team_id')->references('id')->on('teams')->onUpdate('cascade')->onDelete('restrict');
         });
     }

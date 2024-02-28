@@ -32,7 +32,15 @@ Route::get('/home', function () {
 // });
 
 Route::get('/manage/teams', [TeamController::class, 'listAll']);
+Route::get('/team/add', function () {
+    return view('team.add');
+});
 Route::get('/team/{id}', [TeamController::class, 'find']);
+Route::post('/team/add', [TeamController::class, 'add']);
 
 Route::get('/manage/players', [PlayerController::class, 'listAll']);
+Route::get('/player/add', function () {
+    return view('player.add');
+});
 Route::get('/player/{id}', [PlayerController::class, 'find']);
+Route::post('/player/add', [PlayerController::class, 'add']);

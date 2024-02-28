@@ -8,6 +8,10 @@
     <li><a href="/player/add">Add player</a></li>
 </ul>
 
+@if(session('message'))
+    <p>{{session('message')}}</p>
+@endif
+
 <h2>All players: </h2>
 @if(empty($players))
     <p>There are no players to display</p>
