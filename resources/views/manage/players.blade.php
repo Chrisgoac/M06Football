@@ -29,9 +29,23 @@
                 <td>{{ $player->name }}</td>
                 <td>{{ $player->surname }}</td>
                 <td>{{ $player->position }}</td>
-                <td><a href="/player/modify/{{ $player->id }}">Modify</a> - <a href="/player/erase/{{ $player->id }}">Erase</a></td>
+                <td>
+                    <a href="/edit/player/{{ $player->id }}">Modify</a> - 
+                    <a href="#" onclick="confirmDelete('{{ $player->id }}')">Erase</a>
+                    <form id="delete-form-{{ $player->id }}" action="/delete/player/{{ $player->id }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </td>
             </tr>
         @endforeach    
     </table>
+    <script>
+        function confirmDelete(playerId) {
+            if (confirm('Are you sure you want to delete this player?')) {
+                event.preventDefault();
+                document.getElementById('delete-form-' + playerId).submit();
+            }
+        }
+    </script>
 @endif
 @endsection
