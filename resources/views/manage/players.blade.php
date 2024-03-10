@@ -7,7 +7,6 @@
 <ul>
     <li><a href="/player/add">Add player</a></li>
 </ul>
-
 @if(session('message'))
     <p>{{session('message')}}</p>
 @endif
@@ -17,27 +16,31 @@
     <p>There are no players to display</p>
 @else
     <p>Total: {{ count($players) }}</p>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Last name</th>
-            <th>Position</th>
-            <th>Actions</th>
-        </tr>
-        @foreach($players as $player)
+    <table class="table">
+        <thead>
             <tr>
-                <td>{{ $player->name }}</td>
-                <td>{{ $player->surname }}</td>
-                <td>{{ $player->position }}</td>
-                <td>
-                    <a href="/edit/player/{{ $player->id }}">Modify</a> - 
-                    <a href="#" onclick="confirmDelete('{{ $player->id }}')">Erase</a>
-                    <form id="delete-form-{{ $player->id }}" action="/delete/player/{{ $player->id }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </td>
+                <th>Name</th>
+                <th>Last name</th>
+                <th>Position</th>
+                <th>Actions</th>
             </tr>
-        @endforeach    
+        </thead>
+        <tbody>
+            @foreach($players as $player)
+                <tr>
+                    <td>{{ $player->name }}</td>
+                    <td>{{ $player->surname }}</td>
+                    <td>{{ $player->position }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="/edit/player/{{ $player->id }}">Modify</a> - 
+                        <a class="btn btn-secondary" href="#" onclick="confirmDelete('{{ $player->id }}')">Erase</a>
+                        <form id="delete-form-{{ $player->id }}" action="/delete/player/{{ $player->id }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </td>
+                </tr>
+            @endforeach    
+        </tbody>
     </table>
     <script>
         function confirmDelete(playerId) {

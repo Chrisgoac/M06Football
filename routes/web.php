@@ -35,10 +35,15 @@ Route::get('/manage/players', [PlayerController::class, 'listAll']);
 Route::get('/player/add', function () {
     return view('player.add');
 });
+Route::post('/player/unenrol/{player}', [TeamController::class, 'removePlayer']);
+Route::get('/enroll/player/{team}', [TeamController::class, 'showEnrollPage']);
+Route::post('/enroll/player/{player}/{team}', [TeamController::class, 'enrollPlayer']);
+Route::post('/confirmenroll/player/{player}/{team}', [TeamController::class, 'confirmEnrollPlayer']);
+
 Route::get('/player/{player}', [PlayerController::class, 'find']);
 Route::post('/player/add', [PlayerController::class, 'add']);
 
-Route::post('/edit/team', [TeamController::class, 'update']);
+Route::post('/edit/team/{team}', [TeamController::class, 'update']);
 Route::get('/edit/team/{team}', [TeamController::class, 'edit']);
 
 Route::post('/edit/player/{player}', [PlayerController::class, 'update']);
@@ -46,6 +51,8 @@ Route::get('/edit/player/{player}', [PlayerController::class, 'edit']);
 
 Route::post('/delete/player/{player}', [PlayerController::class, 'delete']);
 Route::post('/delete/team/{team}', [TeamController::class, 'delete']);
+
+
 
 Route::fallback(function () {
     return redirect()->back();

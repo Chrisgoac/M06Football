@@ -17,27 +17,31 @@
     <p>There are no teams to display</p>
 @else
     <p>Total: {{ count($teams) }}</p>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Stadium</th>
-            <th>Members number</th>
-            <th>Actions</th>
-        </tr>
-        @foreach($teams as $team)
+    <table class="table">
+        <thead>
             <tr>
-                <td>{{ $team->name }}</td>
-                <td>{{ $team->stadium }}</td>
-                <td>{{ $team->numMembers }}</td>
-                <td>
-                    <a href="/edit/team/{{ $team->id }}">Modify</a> - 
-                    <a href="#" onclick="confirmDelete('{{ $team->id }}')">Erase</a>
-                    <form id="delete-form-{{ $team->id }}" action="/delete/team/{{ $team->id }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </td>
+                <th>Name</th>
+                <th>Stadium</th>
+                <th>Members number</th>
+                <th>Actions</th>
             </tr>
-        @endforeach    
+        </thead>
+        <tbody>
+            @foreach($teams as $team)
+                <tr>
+                    <td>{{ $team->name }}</td>
+                    <td>{{ $team->stadium }}</td>
+                    <td>{{ $team->numMembers }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="/edit/team/{{ $team->id }}">Modify</a> - 
+                        <a class="btn btn-secondary" href="#" onclick="confirmDelete('{{ $team->id }}')">Erase</a>
+                        <form id="delete-form-{{ $team->id }}" action="/delete/team/{{ $team->id }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </td>
+                </tr>
+            @endforeach 
+        </tbody>   
     </table>
     <script>
         function confirmDelete(teamId) {
